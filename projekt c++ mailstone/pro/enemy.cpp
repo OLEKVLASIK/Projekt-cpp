@@ -14,13 +14,13 @@ Enemy::Enemy(QGraphicsItem *parent):QObject(),QGraphicsRectItem(parent)
     setPos(random_number,0);
 
     // rysujemy prostokat
-    setRect(0,0,100,100);//rozmiar
+    setRect(0,0,50,50);//rozmiar
 
     //polaczamy
     QTimer * timer = new QTimer(this);
     connect(timer,SIGNAL(timeout()),this,SLOT(move()));
 
-    timer->start(50);
+    timer->start(30);
 }
 
 void Enemy::move()
