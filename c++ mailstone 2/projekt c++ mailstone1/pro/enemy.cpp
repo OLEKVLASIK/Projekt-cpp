@@ -4,7 +4,7 @@
 #include <stdlib.h> //rand() ->really large int
 #include <QList>
 #include "game.h"
-
+#include "bullet.h"
 extern Game * game; //zmiena globalna dla zmniejszania zycia
 
 Enemy::Enemy(QGraphicsItem *parent):QObject(),QGraphicsRectItem(parent)
@@ -17,10 +17,13 @@ Enemy::Enemy(QGraphicsItem *parent):QObject(),QGraphicsRectItem(parent)
     setRect(0,0,50,50);//rozmiar
 
     //polaczamy
-    QTimer * timer = new QTimer(this);
-    connect(timer,SIGNAL(timeout()),this,SLOT(move()));
+    QTimer * moving = new QTimer(this);
+    connect(moving,SIGNAL(timeout()),this,SLOT(move()));
+    moving->start(30);
 
-    timer->start(30);
+    QTimer * shooting = new QTimer(this);
+    connect(shooting,SIGNAL(timeout()),this,SLOT(shoot()));
+    shooting->start(1000);
 }
 
 void Enemy::move()
@@ -36,4 +39,11 @@ void Enemy::move()
         scene()->removeItem(this);
         delete this;
     }
+}
+
+void Enemy::shoot()
+{
+    Bullet * bullet = new Bullet("enemy");
+    bullet->setPos(x(),y());
+    scene()->addItem(bullet);
 }

@@ -1,20 +1,19 @@
-#ifndef BULLET_H
-#define BULLET_H
+#ifndef ENEMY_H
+#define ENEMY_H
 
 #include <QGraphicsRectItem>
 #include <QObject>
 #include <QGraphicsItem>
 
-class Bullet: public QObject, public QGraphicsRectItem
+
+class Enemy: public QObject, public QGraphicsRectItem
 {
     Q_OBJECT
 public:
-    Bullet(QGraphicsItem * parent =0);
+    Enemy(QGraphicsItem * parent=0);
 public slots: //to znaczy ze ten slot bedzie polaczony z sygmalen move
     void move();
+    void shoot();
 };
 
-
-
-
-#endif // BULLET_H
+#endif // ENEMY_H

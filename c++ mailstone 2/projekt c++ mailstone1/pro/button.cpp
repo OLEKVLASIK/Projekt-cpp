@@ -25,7 +25,7 @@ void Button::mousePressEvent(QGraphicsSceneMouseEvent *event)
     emit clicked();
 }
 
-void Button::hoverEnterEvent(QGraphicsSceneHoverEvent *event)
+void Button::hoverEnterEvent(QGraphicsSceneHoverEvent *event) //najezdzamy na przycisk
 {
     QBrush brush;
     brush.setStyle(Qt::SolidPattern);

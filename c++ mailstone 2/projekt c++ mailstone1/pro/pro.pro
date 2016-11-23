@@ -28,6 +28,7 @@ HEADERS  += \
     enemy.h \
     player.h \
     bullet.h \
-    button.h
+    button.h \
+    bonus.h
 
 FORMS    += mainwindow.ui

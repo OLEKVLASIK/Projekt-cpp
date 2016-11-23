@@ -23,7 +23,7 @@ void Player::keyPressEvent(QKeyEvent *event)
    else if (event->key() == Qt::Key_Space)
    {
        //tworzymy strzal
-       Bullet * bullet = new Bullet();
+       Bullet * bullet = new Bullet("player");
        bullet->setPos(x(),y());
        scene()->addItem(bullet);
    }
