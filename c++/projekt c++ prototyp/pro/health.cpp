@@ -4,7 +4,7 @@
 Health::Health(QGraphicsItem *parent) : QGraphicsTextItem(parent)
 {
     //inicjalizujemy wynik dla 0
-    hp = 2;
+    hp = 10;
     //rysujemy text
     setPlainText(QString("Health: ") + QString::number(hp));
     setDefaultTextColor(Qt::red);

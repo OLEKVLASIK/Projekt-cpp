@@ -19,7 +19,8 @@ SOURCES += main.cpp \
     enemy.cpp \
     player.cpp \
     bullet.cpp \
-    button.cpp
+    button.cpp \
+    bonus.cpp
 
 HEADERS  += \
     game.h \

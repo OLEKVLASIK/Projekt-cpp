@@ -22,6 +22,8 @@ public:
 
 public slots:
     void start();
+    void bonusSpawning();
+    void mainLoop();
 };
 
 

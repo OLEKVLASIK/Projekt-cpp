@@ -5,7 +5,7 @@
 #include <QFont>
 #include "enemy.h"
 #include "button.h"
-
+#include "bonus.h"
 
 
 Game::Game(QWidget *parent)
@@ -26,6 +26,15 @@ Game::Game(QWidget *parent)
 
 void Game::display_Menu()
 {
+    QGraphicsTextItem* title = new QGraphicsTextItem(QString("Shuttle fighters"));
+    QFont titleFont("tahoma",50);
+    title->setFont(titleFont);
+    int text_xPosition = this->width()/2 - title->boundingRect().width()/2;
+    int text_yPosition = 150;
+    title->setPos(text_xPosition, text_yPosition);
+    scene->addItem(title);
+
+
     Button* playButton = new Button(QString("Play"));
     int playButton_xPosition = this->width()/2 - playButton->boundingRect().width()/2;
     int playButton_yPosition = 275;
@@ -43,6 +52,7 @@ void Game::display_Menu()
 
 void Game::start()
 {
+
     scene->clear();
 
     player = new Player();
@@ -66,5 +76,30 @@ void Game::start()
     QObject::connect(timer,SIGNAL(timeout()),player,SLOT(spawn()));
     timer->start(2000);
 
+    QTimer * bonus = new QTimer();
+    QObject::connect(bonus,SIGNAL(timeout()),this,SLOT(bonusSpawning()));
+    bonus->start(10000);
+
+
+
+    QTimer * loop = new QTimer();
+    QObject::connect(loop,SIGNAL(timeout()),this,SLOT(mainLoop()));
+    loop->start(1000);
+
     show();
+
+}
+
+void Game::bonusSpawning()
+{
+    Bonus * bonus = new Bonus();
+    scene->addItem(bonus);
+}
+
+void Game::mainLoop()
+{
+        if(health->hp<1)
+        {
+            scene->clear();
+        }
 }

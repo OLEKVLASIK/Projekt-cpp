@@ -12,5 +12,7 @@ int main(int argc, char *argv[])
     game->show();
     game->display_Menu();
 
+
+
     return a.exec();
 }

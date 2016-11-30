@@ -5,6 +5,7 @@
 #include "enemy.h"
 #include <typeinfo>
 #include "game.h"
+#include "bonus.h"
 
 extern Game * game;//zmiena globalna ktora jest wykarzystana dla zwiekszania wyniku
 
@@ -34,6 +35,23 @@ void Bullet::move()
             if(typeid(*(colliding_items[i]))==typeid(Enemy)){
                 //zwiekszanie wyniku
                 game->score->increase();
+
+                scene()->removeItem(colliding_items[i]);
+                scene()->removeItem(this);
+                delete colliding_items[i];
+                delete this;
+                return;
+            }
+        }
+        for(int i=0, n=colliding_items.size(); i<n; i++){
+            if(typeid(*(colliding_items[i]))==typeid(Bonus)){
+                //zwiekszanie wyniku
+                game->score->increase();
+                game->score->increase();
+                game->score->increase();
+                game->score->increase();
+                game->score->increase();
+
 
                 scene()->removeItem(colliding_items[i]);
                 scene()->removeItem(this);

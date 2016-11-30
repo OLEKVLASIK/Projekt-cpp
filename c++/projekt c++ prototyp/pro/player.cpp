@@ -4,6 +4,7 @@
 #include <QGraphicsScene>
 #include "enemy.h"
 #include "game.h"
+#include "QDebug"
 
 Player::Player(QGraphicsItem *parent):QGraphicsRectItem(parent)
 {}
@@ -34,4 +35,5 @@ void Player::spawn()
     //tworzymy wroga
     Enemy * enemy= new Enemy();
     scene()->addItem(enemy);
+    qDebug()<<"Stworzono";
 }
