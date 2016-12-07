@@ -37,6 +37,6 @@ void Button::hoverLeaveEvent(QGraphicsSceneHoverEvent *event)
 {
     QBrush brush;
     brush.setStyle(Qt::SolidPattern);
-    brush.setColor(Qt::yellow);
+    brush.setColor(Qt::blue);
     setBrush(brush);
 }
