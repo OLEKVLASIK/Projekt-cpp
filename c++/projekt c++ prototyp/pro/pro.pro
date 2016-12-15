@@ -33,3 +33,6 @@ HEADERS  += \
     bonus.h
 
 FORMS    += mainwindow.ui
+
+RESOURCES += \
+    source.qrc

@@ -1,11 +1,11 @@
 #ifndef BONUS_H
 #define BONUS_H
 
-#include <QGraphicsRectItem>
+#include <QGraphicsPixmapItem>
 #include <QObject>
 #include <QGraphicsItem>
 
-class Bonus: public QObject, public QGraphicsRectItem
+class Bonus: public QObject, public QGraphicsPixmapItem
 {
     Q_OBJECT
 public:

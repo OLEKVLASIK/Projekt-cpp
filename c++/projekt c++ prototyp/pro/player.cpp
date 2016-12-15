@@ -6,8 +6,10 @@
 #include "game.h"
 #include "QDebug"
 
-Player::Player(QGraphicsItem *parent):QGraphicsRectItem(parent)
-{}
+Player::Player(QGraphicsItem *parent):QGraphicsPixmapItem(parent)
+{
+
+}
 
 void Player::keyPressEvent(QKeyEvent *event)
 {

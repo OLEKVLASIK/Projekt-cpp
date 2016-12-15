@@ -6,13 +6,16 @@
 #include "enemy.h"
 #include "button.h"
 #include "bonus.h"
-
+#include <QImage>
+#include <QBrush>
+#include <QKeyEvent>
 
 Game::Game(QWidget *parent)
 {
       // tworzenie ekranu
     scene = new QGraphicsScene();
     scene->setSceneRect(0,0,800,600);
+    setBackgroundBrush(QBrush(QImage(":/img/img/sky1.png")));
     setScene(scene);
     setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
@@ -26,13 +29,14 @@ Game::Game(QWidget *parent)
 
 void Game::display_Menu()
 {
-    QGraphicsTextItem* title = new QGraphicsTextItem(QString("Shuttle fighters"));
+    QGraphicsTextItem* title = new QGraphicsTextItem(QString("Statki kosmiczne"));
     QFont titleFont("tahoma",50);
     title->setFont(titleFont);
     int text_xPosition = this->width()/2 - title->boundingRect().width()/2;
     int text_yPosition = 150;
     title->setPos(text_xPosition, text_yPosition);
     scene->addItem(title);
+
 
 
     Button* playButton = new Button(QString("Play"));
@@ -56,7 +60,7 @@ void Game::start()
     scene->clear();
 
     player = new Player();
-    player->setRect(0,0,100,100);
+    player->setPixmap(QPixmap(":/img/img/player1.png"));
     player->setPos(400,500);
 
     // zrob kwadrat focusabelnym
@@ -101,5 +105,15 @@ void Game::mainLoop()
         if(health->hp<1)
         {
             scene->clear();
+            setBackgroundBrush(QBrush(QImage(":/img/img/gameover1.jpg")));
+            QGraphicsTextItem* title = new QGraphicsTextItem(QString("Wciśnij A żeby przejść do menu gry"));
+            QFont titleFont("tahoma",20);
+            title->setDefaultTextColor(Qt::red);
+            title->setFont(titleFont);
+            int text_xPosition = this->width()/2 - title->boundingRect().width()/2;
+            int text_yPosition = 450;
+            title->setPos(text_xPosition, text_yPosition);
+            scene->addItem(title);
+
         }
 }

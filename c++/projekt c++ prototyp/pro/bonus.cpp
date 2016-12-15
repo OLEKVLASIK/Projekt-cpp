@@ -9,5 +9,5 @@ Bonus::Bonus()
     setPos(random_x,random_y);
 
     // rysujemy prostokat
-    setRect(0,0,25,25);//rozmiar
+    setPixmap(QPixmap(":/img/img/bonus_cherry.png"));;//rozmiar
 }

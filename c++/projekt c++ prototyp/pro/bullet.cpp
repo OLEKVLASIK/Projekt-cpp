@@ -13,7 +13,7 @@ Bullet::Bullet(QString Shooter)
 {
     shooter = Shooter;
     // rysujemy prostokat
-    setRect(0,0,10,50);//rozmiar
+    setPixmap(QPixmap(":/img/img/shoot.png"));//rozmiar
 
     //polaczamy
     QTimer * timer = new QTimer(this);
@@ -31,7 +31,8 @@ void Bullet::move()
     {
         QList<QGraphicsItem*>colliding_items = collidingItems();
 
-        for(int i=0, n=colliding_items.size(); i<n; i++){
+        for(int i=0, n=colliding_items.size(); i<n; i++)
+        {
             if(typeid(*(colliding_items[i]))==typeid(Enemy)){
                 //zwiekszanie wyniku
                 game->score->increase();
@@ -43,7 +44,8 @@ void Bullet::move()
                 return;
             }
         }
-        for(int i=0, n=colliding_items.size(); i<n; i++){
+        for(int i=0, n=colliding_items.size(); i<n; i++)
+        {
             if(typeid(*(colliding_items[i]))==typeid(Bonus)){
                 //zwiekszanie wyniku
                 game->score->increase();
@@ -62,7 +64,7 @@ void Bullet::move()
         }
         //ruch move do gory
         setPos(x(),y()-10);
-        if (pos().y() + rect().height() < 0)
+        if (pos().y() + pixmap().height() < 0)
         {
             scene()->removeItem(this);
             delete this;
@@ -86,7 +88,7 @@ void Bullet::move()
         }
         //ruch move do gory
         setPos(x(),y()+25);
-        if (pos().y() + rect().height() < 0)
+        if (pos().y() + pixmap().height() < 0)
         {
             scene()->removeItem(this);
             delete this;

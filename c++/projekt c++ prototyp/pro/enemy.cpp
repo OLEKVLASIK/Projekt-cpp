@@ -7,14 +7,14 @@
 #include "bullet.h"
 extern Game * game; //zmiena globalna dla zmniejszania zycia
 
-Enemy::Enemy(QGraphicsItem *parent):QObject(),QGraphicsRectItem(parent)
+Enemy::Enemy(QGraphicsItem *parent):QObject(),QGraphicsPixmapItem(parent)
 {
     //losowanie grzacza
     int random_number = rand() % 700;
     setPos(random_number,0);
 
     // rysujemy prostokat
-    setRect(0,0,50,50);//rozmiar
+    setPixmap(QPixmap(":/img/img/enemy.png"));//rozmiar
 
     //polaczamy
     QTimer * moving = new QTimer(this);
