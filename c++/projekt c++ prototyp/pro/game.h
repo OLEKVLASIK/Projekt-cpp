@@ -18,7 +18,8 @@ public:
     Player * player;
     Score * score;
     Health * health;
-
+    QTimer * bonus;
+    QTimer * loop;
 
 public slots:
     void start();

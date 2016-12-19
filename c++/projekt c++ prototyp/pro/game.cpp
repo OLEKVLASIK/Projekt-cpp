@@ -9,6 +9,7 @@
 #include <QImage>
 #include <QBrush>
 #include <QKeyEvent>
+#include "health.h"
 
 Game::Game(QWidget *parent)
 {
@@ -73,6 +74,8 @@ void Game::start()
     score = new Score();
     scene->addItem(score);
 
+    health = new Health();
+    health->setPos(0,25);
     scene->addItem(health);
 
     // wrogi
@@ -80,15 +83,16 @@ void Game::start()
     QObject::connect(timer,SIGNAL(timeout()),player,SLOT(spawn()));
     timer->start(2000);
 
-    QTimer * bonus = new QTimer();
+    bonus = new QTimer();
     QObject::connect(bonus,SIGNAL(timeout()),this,SLOT(bonusSpawning()));
     bonus->start(10000);
 
 
 
-    QTimer * loop = new QTimer();
+
+    loop = new QTimer();
     QObject::connect(loop,SIGNAL(timeout()),this,SLOT(mainLoop()));
-    loop->start(1000);
+    loop->start(500);
 
     show();
 
@@ -105,15 +109,40 @@ void Game::mainLoop()
         if(health->hp<1)
         {
             scene->clear();
-            setBackgroundBrush(QBrush(QImage(":/img/img/gameover1.jpg")));
-            QGraphicsTextItem* title = new QGraphicsTextItem(QString("Wciśnij A żeby przejść do menu gry"));
-            QFont titleFont("tahoma",20);
-            title->setDefaultTextColor(Qt::red);
+            //setBackgroundBrush(QBrush(QImage(":/img/img/gameover1.jpg")));
+            QGraphicsTextItem* title = new QGraphicsTextItem(QString("Game Over"));
+            QFont titleFont("tahoma",50);
             title->setFont(titleFont);
             int text_xPosition = this->width()/2 - title->boundingRect().width()/2;
-            int text_yPosition = 450;
+            int text_yPosition = 100;
             title->setPos(text_xPosition, text_yPosition);
             scene->addItem(title);
 
+            QGraphicsTextItem* wynik = new QGraphicsTextItem(QString("Your score is: ")+ QString::number(score->getScore()));
+            QFont wynikFont("tahoma",25);
+            wynik->setFont(wynikFont);
+            int text_xPosition1 = 300;
+            int text_yPosition1 = 450;
+            wynik->setPos(text_xPosition1, text_yPosition1);
+            scene->addItem(wynik);
+
+            bonus->stop();
+
+            Button* playButton = new Button(QString("Play"));
+            int playButton_xPosition = this->width()/2 - playButton->boundingRect().width()/2;
+            int playButton_yPosition = 275;
+            playButton->setPos(playButton_xPosition, playButton_yPosition);
+            connect(playButton, SIGNAL(clicked()), this, SLOT(start()));
+            scene->addItem(playButton);
+
+            Button* quitButton = new Button(QString("Quit"));
+            int quitButton_xPosition = this->width()/2 - quitButton->boundingRect().width()/2;
+            int quitButton_yPosition = 350;
+            quitButton->setPos(quitButton_xPosition, quitButton_yPosition);
+            connect(quitButton, SIGNAL(clicked()), this, SLOT(close()));
+            scene->addItem(quitButton);
+
+            loop->stop();
         }
+
 }

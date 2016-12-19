@@ -5,6 +5,7 @@
 #include "enemy.h"
 #include "game.h"
 #include "QDebug"
+extern Game*game;
 
 Player::Player(QGraphicsItem *parent):QGraphicsPixmapItem(parent)
 {
