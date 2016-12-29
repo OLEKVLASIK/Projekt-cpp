@@ -4,6 +4,7 @@
 #include <QGraphicsPixmapItem>
 #include <QObject>
 #include <QGraphicsItem>
+#include <QMediaPlayer>
 
 class Player:public QObject, public QGraphicsPixmapItem
 {
@@ -13,6 +14,9 @@ public:
     void keyPressEvent(QKeyEvent * event);
 public slots:
     void spawn();
+private:
+    QMediaPlayer * bulletsound;
+
 };
 
 

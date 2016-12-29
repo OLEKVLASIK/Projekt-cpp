@@ -9,7 +9,8 @@ extern Game*game;
 
 Player::Player(QGraphicsItem *parent):QGraphicsPixmapItem(parent)
 {
-
+    bulletsound = new QMediaPlayer();
+    bulletsound->setMedia(QUrl("qrc:/img/img/fed_laser.wav"));
 }
 
 void Player::keyPressEvent(QKeyEvent *event)
@@ -30,6 +31,16 @@ void Player::keyPressEvent(QKeyEvent *event)
        Bullet * bullet = new Bullet("player");
        bullet->setPos(x(),y());
        scene()->addItem(bullet);
+
+       //muzyka
+       if(bulletsound->state() == QMediaPlayer::PlayingState)
+       {
+           bulletsound->setPosition(0);
+       }
+       else if(bulletsound->state() == QMediaPlayer::StoppedState)
+       {
+           bulletsound->play();
+       }
    }
 }
 

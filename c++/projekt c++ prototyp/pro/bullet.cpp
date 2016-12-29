@@ -63,7 +63,7 @@ void Bullet::move()
             }
         }
         //ruch move do gory
-        setPos(x(),y()-10);
+        setPos(x(),y()-25);
         if (pos().y() + pixmap().height() < 0)
         {
             scene()->removeItem(this);

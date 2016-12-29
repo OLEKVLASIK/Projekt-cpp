@@ -1,5 +1,6 @@
 #include "bonus.h"
 #include <stdlib.h>
+#include <QMediaPlayer>
 
 Bonus::Bonus()
 {
@@ -10,4 +11,5 @@ Bonus::Bonus()
 
     // rysujemy prostokat
     setPixmap(QPixmap(":/img/img/bonus_cherry.png"));;//rozmiar
+
 }

@@ -10,6 +10,7 @@
 #include <QBrush>
 #include <QKeyEvent>
 #include "health.h"
+#include <QMediaPlayer>
 
 Game::Game(QWidget *parent)
 {
@@ -82,17 +83,23 @@ void Game::start()
     QTimer * timer= new QTimer();
     QObject::connect(timer,SIGNAL(timeout()),player,SLOT(spawn()));
     timer->start(2000);
+    //
 
+    //bosus
     bonus = new QTimer();
     QObject::connect(bonus,SIGNAL(timeout()),this,SLOT(bonusSpawning()));
     bonus->start(10000);
-
-
-
+    //
 
     loop = new QTimer();
     QObject::connect(loop,SIGNAL(timeout()),this,SLOT(mainLoop()));
     loop->start(500);
+
+    //muzyka
+    music = new QMediaPlayer();
+    music->setMedia(QUrl("qrc:/img/img/A Journey Awaits.mp3"));
+    music->play();
+
 
     show();
 
@@ -109,6 +116,7 @@ void Game::mainLoop()
         if(health->hp<1)
         {
             scene->clear();
+            music->stop();
             //setBackgroundBrush(QBrush(QImage(":/img/img/gameover1.jpg")));
             QGraphicsTextItem* title = new QGraphicsTextItem(QString("Game Over"));
             QFont titleFont("tahoma",50);
@@ -117,6 +125,7 @@ void Game::mainLoop()
             int text_yPosition = 100;
             title->setPos(text_xPosition, text_yPosition);
             scene->addItem(title);
+
 
             QGraphicsTextItem* wynik = new QGraphicsTextItem(QString("Your score is: ")+ QString::number(score->getScore()));
             QFont wynikFont("tahoma",25);

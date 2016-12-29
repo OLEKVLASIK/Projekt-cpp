@@ -20,6 +20,7 @@ public:
     Health * health;
     QTimer * bonus;
     QTimer * loop;
+    QMediaPlayer * music;
 
 public slots:
     void start();
